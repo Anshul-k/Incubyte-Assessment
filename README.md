@@ -39,7 +39,7 @@ To set up the project locally, clone the repository and install the dependencies
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/Anshul-k/Incubyte-Assessment
 
 # Navigate to the project directory
 cd string-calculator-tdd
