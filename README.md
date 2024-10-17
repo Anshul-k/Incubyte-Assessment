@@ -1,72 +1,180 @@
-# Getting Started with Create React App
+# String Calculator TDD Kata
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a solution to the **String Calculator TDD Kata** as part of the technical assessment for the Software Craftsperson position at **Incubyte**. The assessment demonstrates proficiency in Test-Driven Development (TDD) and writing clean, maintainable, and well-tested code.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+- [Project Setup](#project-setup)
+- [Project Structure](#project-structure)
+- [Usage](#usage)
+- [Test Cases](#test-cases)
+- [TDD Methodology](#tdd-methodology)
+- [Custom Delimiters](#custom-delimiters)
+- [Error Handling](#error-handling)
+- [Technology Stack](#technology-stack)
+- [License](#license)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The goal of the **String Calculator** is to create a calculator that takes a string of comma-separated numbers and returns their sum. The project demonstrates implementing features via **Test-Driven Development (TDD)**, following the requirements provided in the assessment.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The application handles the following cases:
+1. **Empty Input**: Returns `0`.
+2. **Single Number**: Returns the number itself.
+3. **Multiple Numbers**: Sums up comma-separated numbers.
+4. **New Line Delimiters**: Supports newlines as delimiters between numbers.
+5. **Custom Delimiters**: Allows users to define their own delimiters using the format `//[delimiter]\n[numbers]`.
+6. **Negative Numbers**: Throws an exception with a message listing all negative numbers.
 
-### `npm test`
+## Project Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/en/download/)
+- [npm](https://www.npmjs.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To set up the project locally, clone the repository and install the dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# Clone the repository
+git clone <repository-url>
 
-### `npm run eject`
+# Navigate to the project directory
+cd string-calculator-tdd
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Install dependencies
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Running the App
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To start the application:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+This will run the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The page will reload if you make edits. You will also see any lint errors in the console.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Running Tests
 
-### Code Splitting
+To run the test cases for the `String Calculator` logic and ensure everything works as expected, execute the following command:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm test
+```
 
-### Analyzing the Bundle Size
+This command runs all the test cases using Jest and React Testing Library. You can view the results directly in the terminal, and it will display which tests passed or failed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Project Structure
 
-### Making a Progressive Web App
+The project is organized as follows:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+├── src
+│   ├── components
+│   │   └── App.js               # Main React component for the calculator UI
+│   ├── stringCalculator.js       # Core logic of the string calculator
+│   ├── tests
+│   │   └── stringCalculator.test.js  # Unit tests for string calculator
+│   └── index.js                 # Entry point for the React app
+├── public
+│   └── index.html               # Static HTML template
+├── package.json                 # Project dependencies and scripts
+├── README.md                    # Project documentation (this file)
+└── tailwind.config.js           # Tailwind CSS configuration
 
-### Advanced Configuration
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Input Format
 
-### Deployment
+The string calculator supports various input formats:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. **Comma-Separated Numbers**: Input can include numbers separated by commas. For example:
 
-### `npm run build` fails to minify
+```bash
+"1,2,3" → 6
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# Incubyte-Assessment
-"# Incubyte-Assessment" 
+2. **Newline as a Delimiter**: You can use a newline (`\n`) as a delimiter. For example:
+```bash
+"1\n2,3" → 6
+```
+
+3. **Custom Delimiter**: If you want to specify a custom delimiter, input should follow the format `//[delimiter]\n[numbers]`. For example:
+```bash
+"//;\n1;2;3" → 6
+```
+
+4. **Negative Numbers**: If the input contains negative numbers, the calculator will throw an error, showing the negative numbers in the message:
+```bash
+"1,-2,3" → Error: "negative numbers not allowed -2"
+```
+
+5. **Empty Input**: An empty input string will return `0`.
+
+### Features
+
+- **Multiple Delimiters**: Handles both comma and newline as default delimiters.
+- **Custom Delimiters**: Allows users to specify custom delimiters using the format `//[delimiter]\n[numbers]`.
+- **Error Handling**: Throws an exception when negative numbers are present and lists all of them in the error message.
+- **Scalable Input**: Handles an arbitrary number of inputs, supporting a wide range of values.
+
+## Example Usage
+
+- **With Comma Delimiter**:
+```bash
+Input: "1,2,3" Output: 6
+```
+- **With Newline Delimiter**:
+```bash
+Input: "1\n2,3" Output: 6
+```
+- **With Custom Delimiter**:
+```bash
+Input: "//;\n1;2;3" Output: 6
+```
+- **With Negative Numbers**:
+```bash
+Input: "1,-2,3" Output: Error: "negative numbers not allowed -2"
+```
+- **Empty Input**:
+```bash
+Input: "" Output: 0
+```
+
+## TDD Process
+
+This project follows a **Test-Driven Development (TDD)** approach, ensuring that the development process revolves around writing tests first and implementing code to pass those tests.
+
+### Steps in TDD
+
+1. **Write a Test**: Start by writing a test that defines the desired functionality.
+2. **Run the Test (Fail)**: The test should fail initially because no functionality has been implemented yet.
+3. **Implement the Code**: Write the simplest code possible to make the test pass.
+4. **Run the Test (Pass)**: Verify that the test passes with the implementation.
+5. **Refactor**: Clean up the code while ensuring that all tests continue to pass.
+
+### Example of TDD in Action
+
+For a feature like adding numbers separated by a custom delimiter:
+
+1. Write a test to expect the result for a custom delimiter (e.g., `//;\n1;2`).
+2. Implement code to parse and handle the custom delimiter.
+3. Run the test to ensure it passes.
+4. Refactor if necessary, ensuring the test still passes.
+
+## Benefits of TDD
+
+- **Reduced Bugs**: Writing tests first helps identify and fix bugs early in the development process.
+- **Confidence in Code**: With a comprehensive test suite, developers can refactor and modify code with confidence.
+- **Improved Design**: TDD promotes cleaner, more modular, and maintainable code.
+
+## License
+
+This project is licensed under the MIT License.
