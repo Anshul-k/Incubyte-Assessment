@@ -8,11 +8,9 @@ This project is a solution to the **String Calculator TDD Kata** as part of the 
 - [Project Setup](#project-setup)
 - [Project Structure](#project-structure)
 - [Usage](#usage)
-- [Test Cases](#test-cases)
-- [TDD Methodology](#tdd-methodology)
-- [Custom Delimiters](#custom-delimiters)
-- [Error Handling](#error-handling)
-- [Technology Stack](#technology-stack)
+- [Input Format](#input-format)
+- [TDD Process](#tdd-process)
+- [Benefits of TDD](#benefits-of-tdd)
 - [License](#license)
 
 ## Overview
@@ -41,7 +39,7 @@ To set up the project locally, clone the repository and install the dependencies
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/Anshul-k/Incubyte-Assessment
 
 # Navigate to the project directory
 cd string-calculator-tdd
@@ -76,6 +74,7 @@ This command runs all the test cases using Jest and React Testing Library. You c
 
 The project is organized as follows:
 
+```bash
 ├── src
 │   ├── components
 │   │   └── App.js               # Main React component for the calculator UI
@@ -88,11 +87,17 @@ The project is organized as follows:
 ├── package.json                 # Project dependencies and scripts
 ├── README.md                    # Project documentation (this file)
 └── tailwind.config.js           # Tailwind CSS configuration
+```
 
 ## Usage
+The app provides a simple UI for inputting strings of numbers separated by commas, newlines, or custom delimiters. It calculates the sum and displays it on the screen.
 
-### Input Format
+-Enter a comma-separated string of numbers.
+-Optionally, use a custom delimiter in the format //[delimiter]\n[numbers].
+-Click Calculate to display the sum.
+-In case of negative numbers, an error message will be shown listing the negative values.
 
+## Input Format
 The string calculator supports various input formats:
 
 1. **Comma-Separated Numbers**: Input can include numbers separated by commas. For example:
@@ -152,7 +157,7 @@ Input: "" Output: 0
 
 This project follows a **Test-Driven Development (TDD)** approach, ensuring that the development process revolves around writing tests first and implementing code to pass those tests.
 
-### Steps in TDD
+## Steps in TDD
 
 1. **Write a Test**: Start by writing a test that defines the desired functionality.
 2. **Run the Test (Fail)**: The test should fail initially because no functionality has been implemented yet.
